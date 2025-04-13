@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Envelope + Letter (Open/Close on Click)</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="flowers"></div>
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong>ပန်းရေ</strong>
+                        <p>
+                            
+
+အခုနှစ်သစ်မှာလဲ ပန်းနဲ့ပဲအတူရှိချင်ပါတယ်။ <br>ပိတောက်ပန်းလာမပေးနိုင်သေးတာကိုကို့ကို ခွင့်လွှတ်ပေးပါ။ Virtual ပိတောက်ပန်းလေးတွေ ပို့ပေးလိုက်တယ်နော်။ ပန်းကို ကိုကို့စိတ်ထဲအမြဲရှိပါတယ်။အလုပ်တွေများနေရင်တောင် ပန်းအကြောင်းအတွေးမပျက်ပါဘူး။ အရမ်းချစ်တယ်နော်။ 💕
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+    <script>
+        const envelope = document.querySelector('.envelope-wrapper');
+        const flowersContainer = document.querySelector('.flowers');
+      
+        let flowerInterval = null;
+      
+        envelope.addEventListener('click', () => {
+          envelope.classList.toggle('flap');
+      
+          if (envelope.classList.contains('flap')) {
+            startDroppingFlowers();
+          } else {
+            stopDroppingFlowers();
+          }
+        });
+      
+        function startDroppingFlowers() {
+          // Prevent multiple intervals
+          if (flowerInterval) return;
+      
+          flowerInterval = setInterval(() => {
+            dropFlowers(3); // drop a few flowers each cycle
+          }, 300); // drop every 300ms
+        }
+      
+        function stopDroppingFlowers() {
+          clearInterval(flowerInterval);
+          flowerInterval = null;
+        }
+      
+        function dropFlowers(count = 1) {
+          for (let i = 0; i < count; i++) {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.style.left = `${Math.random() * 100}%`;
+            flower.style.animationDuration = `${2 + Math.random() * 3}s`;
+            flower.style.animationDelay = `${Math.random()}s`;
+            flowersContainer.appendChild(flower);
+      
+            // Clean up flower after it falls
+            setTimeout(() => {
+              flower.remove();
+            }, 6000);
+          }
+        }
+      </script>
+      
+      
+</body>
+</html>
